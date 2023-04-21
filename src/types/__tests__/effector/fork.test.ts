@@ -45,7 +45,7 @@ describe('serialize cases (should fail)', () => {
 
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      Type 'Event<void>' is missing the following properties from type 'Store<any>': reset, getState, on, off, and 2 more.
+      Type 'Event<void>' is missing the following properties from type 'Store<any>': getState, updates, defaultState, reset, and 2 more.
       "
     `)
   })
@@ -144,7 +144,8 @@ describe('fork values', () => {
                       Type '[Store<number>, number] | [Store<string>, string]' is not assignable to type 'readonly [Store<number>, number]'.
                         Type '[Store<string>, string]' is not assignable to type 'readonly [Store<number>, number]'.
                           Type at position 0 in source is not compatible with type at position 0 in target.
-                            Type 'Store<string>' is not assignable to type 'Store<number>'.
+                            The types returned by 'getState()' are incompatible between these types.
+                              Type 'string' is not assignable to type 'number'.
         "
       `)
     })

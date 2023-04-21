@@ -197,28 +197,13 @@ type InferValueFromTupleOfUnits<T extends Tuple<Unit<any>>> =
   T[number] extends Unit<infer R> ? R : never
 
 export interface Store<State> extends Unit<State> {
-  reset(...triggers: Array<Unit<any>>): this
-  reset(triggers: Array<Unit<any>>): this
   getState(): State
-  map<T>(fn: (state: State, lastState?: T) => T): Store<T>
+  subscribe(listener: Observer<State> | ((state: State) => any)): Subscription
+  map<T>(fn: (state: State, lastState?: T) => T): DerivedStore<T>
   /**
    * @deprecated second argument of `fn` and `firstState` are deprecated, use `updateFilter` or explicit `createStore` instead
    */
   map<T>(fn: (state: State, lastState: T) => T, firstState: T): Store<T>
-  on<E>(
-    trigger: Unit<E>,
-    reducer: (state: State, payload: E) => State | void,
-  ): this
-  on<E>(
-    triggers: Unit<E>[],
-    reducer: (state: State, payload: E) => State | void,
-  ): this
-  on<E extends Tuple<Unit<any>>>(
-    triggers: E,
-    reducer: (state: State, payload: InferValueFromTupleOfUnits<E>) => State | void,
-  ): this
-  off(trigger: Unit<any>): this
-  subscribe(listener: Observer<State> | ((state: State) => any)): Subscription
   updates: Event<State>
   watch<E>(watcher: (state: State, payload: undefined) => any): Subscription
   watch<E>(
@@ -233,8 +218,25 @@ export interface Store<State> extends Unit<State> {
   compositeName: CompositeName
   shortName: string
   sid: string | null
+  reset(...triggers: Array<Unit<any>>): this
+  reset(triggers: Array<Unit<any>>): this
+  on<E>(
+    trigger: Unit<E>,
+    reducer: (state: State, payload: E) => State | void,
+  ): this
+  on<E>(
+    triggers: Unit<E>[],
+    reducer: (state: State, payload: E) => State | void,
+  ): this
+  on<E extends Tuple<Unit<any>>>(
+    triggers: E,
+    reducer: (state: State, payload: InferValueFromTupleOfUnits<E>) => State | void,
+  ): this
+  off(trigger: Unit<any>): this
   reinit?: Event<void>
 }
+
+export type DerivedStore<State> = Omit<Store<State>, 'on' | 'reset'>
 
 export const is: {
   unit(obj: unknown): obj is Unit<any>
@@ -1119,8 +1121,10 @@ type SampleImpl<
       : [message: {error: 'source should be unit or object with stores'; got: Source}]
   // has target
   : Target extends Units | ReadonlyArray<Unit<any>>
+  ? Target extends DerivedStore<any> | ReadonlyArray<DerivedStore<any>>
+    ? [message: {error: 'target should not be derived store'; got: Target }]
       // has target, no source
-    ? unknown extends Source
+    : unknown extends Source
       ? unknown extends Clock
         ? [message: {error: 'either target, clock or source should exists'}]
           // has target, no source, has clock
@@ -2784,7 +2788,7 @@ export function withRegion<T = void>(unit: Unit<any> | Node, cb: () => T): T
  */
 export function combine<T extends Store<any>>(
   store: T,
-): T extends Store<infer R> ? Store<[R]> : never
+): T extends Store<infer R> ? DerivedStore<[R]> : never
 /**
  * Convert array of stores to store with array which values updated upon changes in given ones
  * @param tuple array of stores
@@ -2792,13 +2796,13 @@ export function combine<T extends Store<any>>(
  */
 export function combine<State extends Tuple>(
   tuple: State,
-): Store<{[K in keyof State]: State[K] extends Store<infer U> ? U : State[K]}>
+): DerivedStore<{[K in keyof State]: State[K] extends DerivedStore<infer U> ? U : State[K]}>
 /**
  * Convert object with stores to object store which fields updated upon changes in given ones
  * @param shape object with stores
  * @returns derived store updated upon changes in given ones
  */
-export function combine<State>(shape: CombineState<State>): Store<State>
+export function combine<State>(shape: CombineState<State>): DerivedStore<State>
 /**
  * Convert object with stores to object store which fields updated upon changes in given ones
  * @param shape object with stores
@@ -2806,14 +2810,14 @@ export function combine<State>(shape: CombineState<State>): Store<State>
  */
 export function combine<State>(
   shape: State,
-): Store<{[K in keyof State]: State[K] extends Store<infer U> ? U : State[K]}>
+): DerivedStore<{[K in keyof State]: State[K] extends DerivedStore<infer U> ? U : State[K]}>
 /**
  * Creates derived store from given one, transforming value using the function
  * @param source source store
  * @param fn transformer function, accepts a store value
  * @returns derived store updated upon changes in given one
  */
-export function combine<A, R>(source: Store<A>, fn: (source: A) => R): Store<R>
+export function combine<A, R>(source: Store<A>, fn: (source: A) => R): DerivedStore<R>
 /**
  * Convert array of stores into derived store, transforming values using the function
  * @param tuple array of stores
@@ -2825,7 +2829,7 @@ export function combine<State extends Tuple, R>(
   fn: (
     tuple: {[K in keyof State]: State[K] extends Store<infer U> ? U : State[K]},
   ) => R,
-): Store<R>
+): DerivedStore<R>
 /**
  * Convert object with stores into derived store, transforming values using the function
  * @param shape object with stores
@@ -2837,7 +2841,7 @@ export function combine<State, R>(
   fn: (
     shape: {[K in keyof State]: State[K] extends Store<infer U> ? U : State[K]},
   ) => R,
-): Store<R>
+): DerivedStore<R>
 /**
  * Convert given stores into derived store, transforming values using the function
  * @param fn transformer function, accepts store values in separate arguments
@@ -2847,7 +2851,7 @@ export function combine<A, B, R>(
   a: Store<A>,
   b: Store<B>,
   fn: (a: A, b: B) => R,
-): Store<R>
+): DerivedStore<R>
 /**
  * Convert given stores into derived store, transforming values using the function
  * @param fn transformer function, accepts store values in separate arguments
@@ -2858,7 +2862,7 @@ export function combine<A, B, C, R>(
   b: Store<B>,
   c: Store<C>,
   fn: (a: A, b: B, c: C) => R,
-): Store<R>
+): DerivedStore<R>
 /**
  * Convert given stores into derived store, transforming values using the function
  * @param fn transformer function, accepts store values in separate arguments
@@ -2870,7 +2874,7 @@ export function combine<A, B, C, D, R>(
   c: Store<C>,
   d: Store<D>,
   fn: (a: A, b: B, c: C, d: D) => R,
-): Store<R>
+): DerivedStore<R>
 /**
  * Convert given stores into derived store, transforming values using the function
  * @param fn transformer function, accepts store values in separate arguments
@@ -2883,7 +2887,7 @@ export function combine<A, B, C, D, E, R>(
   d: Store<D>,
   e: Store<E>,
   fn: (a: A, b: B, c: C, d: D, e: E) => R,
-): Store<R>
+): DerivedStore<R>
 /**
  * Convert given stores into derived store, transforming values using the function
  * @param fn transformer function, accepts store values in separate arguments
@@ -2897,7 +2901,7 @@ export function combine<A, B, C, D, E, F, R>(
   e: Store<E>,
   f: Store<F>,
   fn: (a: A, b: B, c: C, d: D, e: E, f: F) => R,
-): Store<R>
+): DerivedStore<R>
 /**
  * Convert given stores into derived store, transforming values using the function
  * @param fn transformer function, accepts store values in separate arguments
@@ -2912,7 +2916,7 @@ export function combine<A, B, C, D, E, F, G, R>(
   f: Store<F>,
   g: Store<G>,
   fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => R,
-): Store<R>
+): DerivedStore<R>
 /**
  * Convert given stores into derived store, transforming values using the function
  *
@@ -2931,7 +2935,7 @@ export function combine<A, B, C, D, E, F, G, H, R>(
   g: Store<G>,
   h: Store<H>,
   fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H) => R,
-): Store<R>
+): DerivedStore<R>
 /**
  * Convert given stores into derived store, transforming values using the function
  *
@@ -2951,7 +2955,7 @@ export function combine<A, B, C, D, E, F, G, H, I, R>(
   h: Store<H>,
   i: Store<I>,
   fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I) => R,
-): Store<R>
+): DerivedStore<R>
 /**
  * Convert given stores into derived store, transforming values using the function
  *
@@ -2972,7 +2976,7 @@ export function combine<A, B, C, D, E, F, G, H, I, J, R>(
   i: Store<I>,
   j: Store<J>,
   fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I, j: J) => R,
-): Store<R>
+): DerivedStore<R>
 /**
  * Convert given stores into derived store, transforming values using the function
  *
@@ -2994,14 +2998,14 @@ export function combine<A, B, C, D, E, F, G, H, I, J, K, R>(
   j: Store<J>,
   k: Store<K>,
   fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I, j: J, k: K) => R,
-): Store<R>
+): DerivedStore<R>
 /**
  * Convert given stores to store with array which values updated upon changes in given ones
  * @returns derived store
  */
 export function combine<T extends Tuple<Store<any>>>(
   ...stores: T
-): Store<{[K in keyof T]: T[K] extends Store<infer U> ? U : T[K]}>
+): DerivedStore<{[K in keyof T]: T[K] extends Store<infer U> ? U : T[K]}>
 
 /**
  * Fully isolated instance of application. The primary purpose of scope includes SSR and testing

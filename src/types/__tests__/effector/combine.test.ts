@@ -1,4 +1,4 @@
-import {combine, createStore, Store} from 'effector'
+import {combine, createStore, DerivedStore, Store} from 'effector'
 
 const typecheck = '{global}'
 
@@ -7,7 +7,11 @@ describe('combine cases (should pass)', () => {
     const R = createStore(233)
     const G = createStore(88)
     const B = createStore(1)
-    const store: Store<{R: number; G: number; B: number}> = combine({R, G, B})
+    const store: DerivedStore<{R: number; G: number; B: number}> = combine({
+      R,
+      G,
+      B,
+    })
     expect(typecheck).toMatchInlineSnapshot(`
       "
       no errors
@@ -18,7 +22,7 @@ describe('combine cases (should pass)', () => {
     const R = createStore(233)
     const G = createStore(88)
     const B = createStore(1)
-    const store: Store<[number, number, number]> = combine([R, G, B])
+    const store: DerivedStore<[number, number, number]> = combine([R, G, B])
     expect(typecheck).toMatchInlineSnapshot(`
       "
       no errors
@@ -41,7 +45,7 @@ describe('combine cases (should pass)', () => {
   })
   test('combine({Color})', () => {
     const Color = createStore('#e95801')
-    const store: Store<{Color: string}> = combine({Color})
+    const store: DerivedStore<{Color: string}> = combine({Color})
     expect(typecheck).toMatchInlineSnapshot(`
       "
       no errors
@@ -50,7 +54,7 @@ describe('combine cases (should pass)', () => {
   })
   test('combine([Color])', () => {
     const Color = createStore('#e95801')
-    const store: Store<[string]> = combine([Color])
+    const store: DerivedStore<[string]> = combine([Color])
     expect(typecheck).toMatchInlineSnapshot(`
       "
       no errors
@@ -61,7 +65,7 @@ describe('combine cases (should pass)', () => {
     const R = createStore(233)
     const G = createStore(88)
     const B = createStore(1)
-    const store: Store<string> = combine(
+    const store: DerivedStore<string> = combine(
       {R, G, B},
       ({R, G, B}) =>
         '#' +
@@ -79,7 +83,7 @@ describe('combine cases (should pass)', () => {
     const R = createStore(233)
     const G = createStore(88)
     const B = createStore(1)
-    const store: Store<string> = combine(
+    const store: DerivedStore<string> = combine(
       [R, G, B],
       ([R, G, B]) =>
         '#' +
@@ -109,7 +113,7 @@ describe('combine cases (should pass)', () => {
   })
   test(`combine({Color}, ({Color}) => '~')`, () => {
     const Color = createStore('#e95801')
-    const store: Store<string> = combine({Color}, ({Color}) => Color)
+    const store: DerivedStore<string> = combine({Color}, ({Color}) => Color)
     expect(typecheck).toMatchInlineSnapshot(`
       "
       no errors
@@ -118,7 +122,7 @@ describe('combine cases (should pass)', () => {
   })
   test(`combine([Color], ([Color]) => '~')`, () => {
     const Color = createStore('#e95801')
-    const store: Store<string> = combine([Color], ([Color]) => Color)
+    const store: DerivedStore<string> = combine([Color], ([Color]) => Color)
     expect(typecheck).toMatchInlineSnapshot(`
       "
       no errors
@@ -127,7 +131,7 @@ describe('combine cases (should pass)', () => {
   })
   test(`combine(Color, (Color) => '~')`, () => {
     const Color = createStore('#e95801')
-    const store: Store<string> = combine(Color, Color => Color)
+    const store: DerivedStore<string> = combine(Color, Color => Color)
     expect(typecheck).toMatchInlineSnapshot(`
       "
       no errors
@@ -138,7 +142,7 @@ describe('combine cases (should pass)', () => {
     const R = createStore(233)
     const G = createStore(88)
     const B = createStore(1)
-    const store: Store<string> = combine(
+    const store: DerivedStore<string> = combine(
       R,
       G,
       B,
@@ -158,7 +162,7 @@ describe('combine cases (should pass)', () => {
     const R = createStore(233)
     const G = createStore(88)
     const B = createStore(1)
-    const store: Store<[number, number, number]> = combine(R, G, B)
+    const store: DerivedStore<[number, number, number]> = combine(R, G, B)
     expect(typecheck).toMatchInlineSnapshot(`
       "
       no errors
@@ -167,7 +171,7 @@ describe('combine cases (should pass)', () => {
   })
   test('combine(Color)', () => {
     const Color = createStore('#e95801')
-    const store: Store<[string]> = combine(Color)
+    const store: DerivedStore<[string]> = combine(Color)
     expect(typecheck).toMatchInlineSnapshot(`
       "
       no errors
@@ -182,12 +186,19 @@ describe('error inference (should fail with number -> string error)', () => {
     const G = createStore(88)
     const B = createStore(1)
     //@ts-expect-error
-    const store: Store<{R: string; G: string; B: string}> = combine({R, G, B})
+    const store: DerivedStore<{R: string; G: string; B: string}> = combine({
+      R,
+      G,
+      B,
+    })
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      Type 'Store<{ R: number; G: number; B: number; }>' is not assignable to type 'Store<{ R: string; G: string; B: string; }>'.
-        The types returned by 'getState()' are incompatible between these types.
-          Type '{ R: number; G: number; B: number; }' is not assignable to type '{ R: string; G: string; B: string; }'.
+      Type 'DerivedStore<{ R: number; G: number; B: number; }>' is not assignable to type 'DerivedStore<{ R: string; G: string; B: string; }>'.
+        Types of property 'map' are incompatible.
+          Type '{ <T>(fn: (state: { R: number; G: number; B: number; }, lastState?: T | undefined) => T): DerivedStore<T>; <T>(fn: (state: { R: number; G: number; B: number; }, lastState: T) => T, firstState: T): DerivedStore<...>; }' is not assignable to type '{ <T>(fn: (state: { R: string; G: string; B: string; }, lastState?: T | undefined) => T): DerivedStore<T>; <T>(fn: (state: { R: string; G: string; B: string; }, lastState: T) => T, firstState: T): DerivedStore<...>; }'.
+            Types of parameters 'fn' and 'fn' are incompatible.
+              Types of parameters 'state' and 'state' are incompatible.
+                Type '{ R: number; G: number; B: number; }' is not assignable to type '{ R: string; G: string; B: string; }'.
       "
     `)
   })
@@ -196,36 +207,45 @@ describe('error inference (should fail with number -> string error)', () => {
     const G = createStore(88)
     const B = createStore(1)
     //@ts-expect-error
-    const store: Store<[string, string, string]> = combine([R, G, B])
+    const store: DerivedStore<[string, string, string]> = combine([R, G, B])
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      Type 'Store<[number, number, number]>' is not assignable to type 'Store<[string, string, string]>'.
-        The types returned by 'getState()' are incompatible between these types.
-          Type '[number, number, number]' is not assignable to type '[string, string, string]'.
+      Type 'DerivedStore<[number, number, number]>' is not assignable to type 'DerivedStore<[string, string, string]>'.
+        Types of property 'map' are incompatible.
+          Type '{ <T>(fn: (state: [number, number, number], lastState?: T | undefined) => T): DerivedStore<T>; <T>(fn: (state: [number, number, number], lastState: T) => T, firstState: T): DerivedStore<...>; }' is not assignable to type '{ <T>(fn: (state: [string, string, string], lastState?: T | undefined) => T): DerivedStore<T>; <T>(fn: (state: [string, string, string], lastState: T) => T, firstState: T): DerivedStore<...>; }'.
+            Types of parameters 'fn' and 'fn' are incompatible.
+              Types of parameters 'state' and 'state' are incompatible.
+                Type '[number, number, number]' is not assignable to type '[string, string, string]'.
       "
     `)
   })
   test('combine({Color})', () => {
     const Color = createStore('#e95801')
     //@ts-expect-error
-    const store: Store<{Color: number}> = combine({Color})
+    const store: DerivedStore<{Color: number}> = combine({Color})
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      Type 'Store<{ Color: string; }>' is not assignable to type 'Store<{ Color: number; }>'.
-        The types returned by 'getState()' are incompatible between these types.
-          Type '{ Color: string; }' is not assignable to type '{ Color: number; }'.
+      Type 'DerivedStore<{ Color: string; }>' is not assignable to type 'DerivedStore<{ Color: number; }>'.
+        Types of property 'map' are incompatible.
+          Type '{ <T>(fn: (state: { Color: string; }, lastState?: T | undefined) => T): DerivedStore<T>; <T>(fn: (state: { Color: string; }, lastState: T) => T, firstState: T): DerivedStore<...>; }' is not assignable to type '{ <T>(fn: (state: { Color: number; }, lastState?: T | undefined) => T): DerivedStore<T>; <T>(fn: (state: { Color: number; }, lastState: T) => T, firstState: T): DerivedStore<...>; }'.
+            Types of parameters 'fn' and 'fn' are incompatible.
+              Types of parameters 'state' and 'state' are incompatible.
+                Type '{ Color: string; }' is not assignable to type '{ Color: number; }'.
       "
     `)
   })
   test('combine([Color])', () => {
     const Color = createStore('#e95801')
     //@ts-expect-error
-    const store: Store<[number]> = combine([Color])
+    const store: DerivedStore<[number]> = combine([Color])
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      Type 'Store<[string]>' is not assignable to type 'Store<[number]>'.
-        The types returned by 'getState()' are incompatible between these types.
-          Type '[string]' is not assignable to type '[number]'.
+      Type 'DerivedStore<[string]>' is not assignable to type 'DerivedStore<[number]>'.
+        Types of property 'map' are incompatible.
+          Type '{ <T>(fn: (state: [string], lastState?: T | undefined) => T): DerivedStore<T>; <T>(fn: (state: [string], lastState: T) => T, firstState: T): DerivedStore<T>; }' is not assignable to type '{ <T>(fn: (state: [number], lastState?: T | undefined) => T): DerivedStore<T>; <T>(fn: (state: [number], lastState: T) => T, firstState: T): DerivedStore<T>; }'.
+            Types of parameters 'fn' and 'fn' are incompatible.
+              Types of parameters 'state' and 'state' are incompatible.
+                Type '[string]' is not assignable to type '[number]'.
       "
     `)
   })
@@ -234,7 +254,7 @@ describe('error inference (should fail with number -> string error)', () => {
     const G = createStore(88)
     const B = createStore(1)
     //@ts-expect-error
-    const store: Store<number> = combine(
+    const store: DerivedStore<number> = combine(
       {R, G, B},
       ({R, G, B}) =>
         '#' +
@@ -244,9 +264,12 @@ describe('error inference (should fail with number -> string error)', () => {
     )
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      Type 'Store<string>' is not assignable to type 'Store<number>'.
-        The types returned by 'getState()' are incompatible between these types.
-          Type 'string' is not assignable to type 'number'.
+      Type 'DerivedStore<string>' is not assignable to type 'DerivedStore<number>'.
+        Types of property 'map' are incompatible.
+          Type '{ <T>(fn: (state: string, lastState?: T | undefined) => T): DerivedStore<T>; <T>(fn: (state: string, lastState: T) => T, firstState: T): DerivedStore<T>; }' is not assignable to type '{ <T>(fn: (state: number, lastState?: T | undefined) => T): DerivedStore<T>; <T>(fn: (state: number, lastState: T) => T, firstState: T): DerivedStore<T>; }'.
+            Types of parameters 'fn' and 'fn' are incompatible.
+              Types of parameters 'state' and 'state' are incompatible.
+                Type 'string' is not assignable to type 'number'.
       "
     `)
   })
@@ -255,7 +278,7 @@ describe('error inference (should fail with number -> string error)', () => {
     const G = createStore(88)
     const B = createStore(1)
     //@ts-expect-error
-    const store: Store<number> = combine(
+    const store: DerivedStore<number> = combine(
       [R, G, B],
       ([R, G, B]) =>
         '#' +
@@ -265,37 +288,37 @@ describe('error inference (should fail with number -> string error)', () => {
     )
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      Type 'Store<string>' is not assignable to type 'Store<number>'.
+      Type 'DerivedStore<string>' is not assignable to type 'DerivedStore<number>'.
       "
     `)
   })
   test(`combine({Color}, ({Color}) => '~')`, () => {
     const Color = createStore('#e95801')
     //@ts-expect-error
-    const store: Store<number> = combine({Color}, ({Color}) => Color)
+    const store: DerivedStore<number> = combine({Color}, ({Color}) => Color)
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      Type 'Store<string>' is not assignable to type 'Store<number>'.
+      Type 'DerivedStore<string>' is not assignable to type 'DerivedStore<number>'.
       "
     `)
   })
   test(`combine([Color], ([Color]) => '~')`, () => {
     const Color = createStore('#e95801')
     //@ts-expect-error
-    const store: Store<number> = combine([Color], ([Color]) => Color)
+    const store: DerivedStore<number> = combine([Color], ([Color]) => Color)
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      Type 'Store<string>' is not assignable to type 'Store<number>'.
+      Type 'DerivedStore<string>' is not assignable to type 'DerivedStore<number>'.
       "
     `)
   })
   test(`combine(Color, (Color) => '~')`, () => {
     const Color = createStore('#e95801')
     //@ts-expect-error
-    const store: Store<number> = combine(Color, Color => Color)
+    const store: DerivedStore<number> = combine(Color, Color => Color)
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      Type 'Store<string>' is not assignable to type 'Store<number>'.
+      Type 'DerivedStore<string>' is not assignable to type 'DerivedStore<number>'.
       "
     `)
   })
@@ -304,7 +327,7 @@ describe('error inference (should fail with number -> string error)', () => {
     const G = createStore(88)
     const B = createStore(1)
     //@ts-expect-error
-    const store: Store<number> = combine(
+    const store: DerivedStore<number> = combine(
       R,
       G,
       B,
@@ -316,7 +339,7 @@ describe('error inference (should fail with number -> string error)', () => {
     )
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      Type 'Store<string>' is not assignable to type 'Store<number>'.
+      Type 'DerivedStore<string>' is not assignable to type 'DerivedStore<number>'.
       "
     `)
   })
@@ -325,22 +348,25 @@ describe('error inference (should fail with number -> string error)', () => {
     const G = createStore(88)
     const B = createStore(1)
     //@ts-expect-error
-    const store: Store<[string, string, string]> = combine(R, G, B)
+    const store: DerivedStore<[string, string, string]> = combine(R, G, B)
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      Type 'Store<[number, number, number]>' is not assignable to type 'Store<[string, string, string]>'.
+      Type 'DerivedStore<[number, number, number]>' is not assignable to type 'DerivedStore<[string, string, string]>'.
       "
     `)
   })
   test('combine(Color)', () => {
     const Color = createStore('#e95801')
     //@ts-expect-error
-    const store: Store<number> = combine(Color)
+    const store: DerivedStore<number> = combine(Color)
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      Type 'Store<[string]>' is not assignable to type 'Store<number>'.
-        The types returned by 'getState()' are incompatible between these types.
-          Type '[string]' is not assignable to type 'number'.
+      Type 'DerivedStore<[string]>' is not assignable to type 'DerivedStore<number>'.
+        Types of property 'map' are incompatible.
+          Type '{ <T>(fn: (state: [string], lastState?: T | undefined) => T): DerivedStore<T>; <T>(fn: (state: [string], lastState: T) => T, firstState: T): DerivedStore<T>; }' is not assignable to type '{ <T>(fn: (state: number, lastState?: T | undefined) => T): DerivedStore<T>; <T>(fn: (state: number, lastState: T) => T, firstState: T): DerivedStore<T>; }'.
+            Types of parameters 'fn' and 'fn' are incompatible.
+              Types of parameters 'state' and 'state' are incompatible.
+                Type '[string]' is not assignable to type 'number'.
       "
     `)
   })
@@ -357,14 +383,14 @@ test('possibly undefined store error message mismatch (should pass)', () => {
     }),
   })
 
-  const resultType: Store<{
+  const resultType: DerivedStore<{
     hasNotActiveFunnels: boolean
     vacancyId: string | undefined
   }> = result
 
   expect(typecheck).toMatchInlineSnapshot(`
     "
-    no errors
+    Type 'DerivedStore<{ hasNotActiveFunnels: boolean; vacancyId: string | undefined; }>' is missing the following properties from type 'Store<{ hasNotActiveFunnels: boolean; vacancyId: string | undefined; }>': reset, on
     "
   `)
 })
@@ -381,13 +407,13 @@ describe('support optional parameters of explicit generic type', () => {
       foo: $store,
       bar: $bar,
     })
-    const resultType: Store<{
+    const resultType: DerivedStore<{
       foo?: string | number
       bar: number
     }> = result
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      no errors
+      Type 'DerivedStore<I>' is missing the following properties from type 'Store<{ foo?: string | number | undefined; bar: number; }>': reset, on
       "
     `)
   })
@@ -397,10 +423,10 @@ describe('support optional parameters of explicit generic type', () => {
       bar: number
     }
     const $bar = createStore(0)
-    const result: Store<I> = combine<I>({bar: $bar})
+    const result: DerivedStore<I> = combine<I>({bar: $bar})
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      no errors
+      Type 'DerivedStore<I>' is missing the following properties from type 'Store<I>': reset, on
       "
     `)
   })
@@ -410,13 +436,13 @@ describe('support optional parameters of explicit generic type', () => {
       bar: number
     }
     const $bar = createStore(0)
-    const result: Store<I> = combine<I>({
+    const result: DerivedStore<I> = combine<I>({
       foo: 0,
       bar: $bar,
     })
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      no errors
+      Type 'DerivedStore<I>' is missing the following properties from type 'Store<I>': reset, on
       "
     `)
   })
@@ -439,10 +465,10 @@ describe('support optional parameters of explicit generic type', () => {
     expect(typecheck).toMatchInlineSnapshot(`
       "
       No overload matches this call.
-        Overload 1 of 18, '(shape: { foo?: string | number | Store<string | number> | undefined; bar: number | Store<number>; }): Store<I>', gave the following error.
-          Argument of type '{ foo: number; bar: Store<number>; baz: Store<number>; }' is not assignable to parameter of type '{ foo?: string | number | Store<string | number> | undefined; bar: number | Store<number>; }'.
+        Overload 1 of 18, '(shape: { foo?: string | number | Store<string | number> | undefined; bar: number | Store<number>; }): DerivedStore<I>', gave the following error.
+          Argument of type '{ foo: number; bar: DerivedStore<number>; baz: DerivedStore<number>; }' is not assignable to parameter of type '{ foo?: string | number | Store<string | number> | undefined; bar: number | Store<number>; }'.
             Object literal may only specify known properties, and 'baz' does not exist in type '{ foo?: string | number | Store<string | number> | undefined; bar: number | Store<number>; }'.
-        Overload 2 of 18, '(shape: I): Store<{ foo?: string | number | undefined; bar: number; }>', gave the following error.
+        Overload 2 of 18, '(shape: I): DerivedStore<{ foo?: string | number | undefined; bar: number; }>', gave the following error.
           Type 'Store<number>' is not assignable to type 'number'.
       "
     `)
@@ -451,13 +477,13 @@ describe('support optional parameters of explicit generic type', () => {
 
 test('support plain values as well as stores', () => {
   const $bar = createStore(0)
-  const result: Store<{foo: number; bar: number}> = combine({
+  const result: DerivedStore<{foo: number; bar: number}> = combine({
     foo: 0,
     bar: $bar,
   })
   expect(typecheck).toMatchInlineSnapshot(`
     "
-    no errors
+    Type 'DerivedStore<{ foo: number; bar: number; }>' is missing the following properties from type 'Store<{ foo: number; bar: number; }>': reset, on
     "
   `)
 })
@@ -491,10 +517,10 @@ describe("#531 large unions doesn't brake combine", () => {
     const $result = combine({
       currency: $currency,
     })
-    const $_: Store<{currency: Currency}> = $result
+    const $_: DerivedStore<{currency: Currency}> = $result
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      no errors
+      Type 'DerivedStore<{ currency: Currency; }>' is missing the following properties from type 'Store<{ currency: Currency; }>': reset, on
       "
     `)
   })
@@ -527,12 +553,10 @@ describe("#531 large unions doesn't brake combine", () => {
       currency: $currency,
     })
     //@ts-expect-error
-    const $_: Store<{currency: number}> = $result
+    const $_: DerivedStore<{currency: number}> = $result
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      Type 'Store<{ currency: Currency; }>' is not assignable to type 'Store<{ currency: number; }>'.
-        The types returned by 'getState()' are incompatible between these types.
-          Type '{ currency: Currency; }' is not assignable to type '{ currency: number; }'.
+      Type 'DerivedStore<{ currency: Currency; }>' is missing the following properties from type 'Store<{ currency: number; }>': reset, on
       "
     `)
   })

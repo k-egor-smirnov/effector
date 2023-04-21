@@ -203,7 +203,24 @@ describe('generic edge cases', () => {
     }
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      no errors
+      Argument of type '{ source: Store<A>; clock: Event<B>; target: Store<A>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<A>; }'.
+        Object literal may only specify known properties, and 'source' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<A>; }'.
+      Argument of type '{ source: Store<A>; clock: Event<B>; fn: (source: any, clock: any) => any; target: Store<A>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<A>; }'.
+        Object literal may only specify known properties, and 'source' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<A>; }'.
+      Parameter 'source' implicitly has an 'any' type.
+      Parameter 'clock' implicitly has an 'any' type.
+      Argument of type '{ clock: Event<B>; source: Store<A>; filter: BooleanConstructor; target: Store<A>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<A>; }'.
+        Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<A>; }'.
+      Argument of type '{ clock: Event<B>; source: Store<A>; filter: BooleanConstructor; fn: (source: any, clock: any) => any; target: Store<A>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<A>; }'.
+        Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<A>; }'.
+      Parameter 'source' implicitly has an 'any' type.
+      Parameter 'clock' implicitly has an 'any' type.
+      Argument of type '{ clock: Event<B>; source: Store<A>; filter: (source: any, clock: any) => boolean; fn: (source: any, clock: any) => any; target: Store<A>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<A>; }'.
+        Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<A>; }'.
+      Parameter 'source' implicitly has an 'any' type.
+      Parameter 'clock' implicitly has an 'any' type.
+      Parameter 'source' implicitly has an 'any' type.
+      Parameter 'clock' implicitly has an 'any' type.
       "
     `)
   })
@@ -269,10 +286,21 @@ describe('generic edge cases', () => {
       "
       Argument of type '[{ source: Store<A>; clock: Event<B>; target: Event<B>; }]' is not assignable to parameter of type 'TargetOrError<A, \\"src\\", Event<B>, { clock: Event<B>; source: Store<A>; filter?: undefined; target: Event<B>; greedy?: boolean | undefined; } & { source: Store<...>; clock: Event<...>; target: Event<...>; }>'.
       Argument of type '[{ source: Store<A>; clock: Event<B>; fn: (source: A, clock: B) => A; target: Event<B>; }]' is not assignable to parameter of type 'TargetOrError<A, \\"fnRet\\", Event<B>, { clock: Event<B>; source: Store<A>; filter?: undefined; fn: (source: A, clock: B) => A; target: Event<B>; greedy?: boolean | undefined; } & { ...; }>'.
-      Argument of type '[{ source: Store<A>; clock: Event<B>; fn: (source: A, clock: B) => B; target: Store<A>; }]' is not assignable to parameter of type 'TargetOrError<B, \\"fnRet\\", Store<A>, { clock: Event<B>; source: Store<A>; filter?: undefined; fn: (source: A, clock: B) => B; target: Store<A>; greedy?: boolean | undefined; } & { ...; }>'.
+      Argument of type '{ source: Store<A>; clock: Event<B>; fn: (source: any, clock: any) => any; target: Store<A>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<A>; }'.
+        Object literal may only specify known properties, and 'source' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<A>; }'.
+      Parameter 'source' implicitly has an 'any' type.
+      Parameter 'clock' implicitly has an 'any' type.
       Argument of type '[{ clock: Event<B>; source: Store<A>; filter: BooleanConstructor; target: Event<B>; }]' is not assignable to parameter of type 'TargetOrError<NonFalsy<A>, \\"src\\", Event<B>, { clock: Event<B>; source: Store<A>; filter: BooleanConstructor; target: Event<B>; greedy?: boolean | undefined; } & { ...; }>'.
-      Argument of type '[{ clock: Event<B>; source: Store<A>; filter: BooleanConstructor; fn: (source: NonFalsy<A>, clock: B) => B; target: Store<A>; }]' is not assignable to parameter of type 'TargetOrError<B, \\"fnRet\\", Store<A>, { clock: Event<B>; source: Store<A>; filter?: BooleanConstructor | undefined; fn?: ((source: NonFalsy<A>, clock: B) => B) | undefined; target: Store<...>; greedy?: boolean | undefined; } & { ...; }>'.
-      Argument of type '[{ clock: Event<B>; source: Store<A>; filter: (source: A, clock: B) => true; fn: (source: A, clock: B) => B; target: Store<A>; }]' is not assignable to parameter of type 'TargetOrError<B, \\"fnRet\\", Store<A>, { clock: Event<B>; source: Store<A>; filter?: ((source: A, clock: B) => true) | undefined; fn?: ((source: A, clock: B) => B) | undefined; target: Store<...>; greedy?: boolean | undefined; } & { ...; }>'.
+      Argument of type '{ clock: Event<B>; source: Store<A>; filter: BooleanConstructor; fn: (source: any, clock: any) => any; target: Store<A>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<A>; }'.
+        Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<A>; }'.
+      Parameter 'source' implicitly has an 'any' type.
+      Parameter 'clock' implicitly has an 'any' type.
+      Argument of type '{ clock: Event<B>; source: Store<A>; filter: (source: any, clock: any) => boolean; fn: (source: any, clock: any) => any; target: Store<A>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<A>; }'.
+        Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<A>; }'.
+      Parameter 'source' implicitly has an 'any' type.
+      Parameter 'clock' implicitly has an 'any' type.
+      Parameter 'source' implicitly has an 'any' type.
+      Parameter 'clock' implicitly has an 'any' type.
       "
     `)
   })
@@ -529,7 +557,9 @@ describe('without clock', () => {
 
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      no errors
+      Argument of type '{ source: Store<{ foo: string; bar: number; }[]>; target: Store<{ foo: string; bar: number; }>; fn: ([obj]: [any]) => any; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<{ foo: string; bar: number; }>; }'.
+        Object literal may only specify known properties, and 'source' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<{ foo: string; bar: number; }>; }'.
+      Binding element 'obj' implicitly has an 'any' type.
       "
     `)
   })
@@ -546,7 +576,10 @@ describe('without clock', () => {
 
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      no errors
+      Argument of type '{ source: { foo: Store<string>; bar: Store<number>; }; target: Store<{ foo: string; bar: number; }>; fn: ({ foo, bar }: { foo: any; bar: any; }) => { foo: any; bar: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<{ foo: string; bar: number; }>; }'.
+        Object literal may only specify known properties, and 'source' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<{ foo: string; bar: number; }>; }'.
+      Binding element 'foo' implicitly has an 'any' type.
+      Binding element 'bar' implicitly has an 'any' type.
       "
     `)
   })
@@ -577,7 +610,8 @@ describe('without clock', () => {
 
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      no errors
+      Argument of type '{ source: { foo: Store<string>; bar: Store<number>; }; target: Store<{ foo: string; bar: number; }>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<{ foo: string; bar: number; }>; }'.
+        Object literal may only specify known properties, and 'source' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<{ foo: string; bar: number; }>; }'.
       "
     `)
   })
@@ -606,7 +640,9 @@ describe('clock without source', () => {
     })
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      no errors
+      Argument of type '{ clock: Store<{ foo: string; bar: number; }[]>; target: Store<{ foo: string; bar: number; }>; fn: ([obj]: [any]) => any; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<{ foo: string; bar: number; }>; }'.
+        Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<{ foo: string; bar: number; }>; }'.
+      Binding element 'obj' implicitly has an 'any' type.
       "
     `)
   })
@@ -620,7 +656,9 @@ describe('clock without source', () => {
     })
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      no errors
+      Argument of type '{ clock: Store<{ foo: string; bar: number; }>[]; target: Store<{ foo: string; bar: number; }>; fn: (foo: any) => any; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<{ foo: string; bar: number; }>; }'.
+        Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<{ foo: string; bar: number; }>; }'.
+      Parameter 'foo' implicitly has an 'any' type.
       "
     `)
   })
@@ -688,8 +726,9 @@ describe('clock without source', () => {
     })
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      Argument of type '{ clock: Store<string>; fn: (foo: string) => string; target: Store<number>; }' is not assignable to parameter of type '{ error: \\"fn result should extend target type\\"; targets: { fnResult: string; targetType: number; }; }'.
-        Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"fn result should extend target type\\"; targets: { fnResult: string; targetType: number; }; }'.
+      Argument of type '{ clock: Store<string>; fn: (foo: any) => any; target: Store<number>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<number>; }'.
+        Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<number>; }'.
+      Parameter 'foo' implicitly has an 'any' type.
       "
     `)
   })
@@ -707,8 +746,9 @@ describe('clock without source', () => {
 
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      Argument of type '{ clock: Store<number>[]; fn: (foo: number) => boolean; target: Store<number>; }' is not assignable to parameter of type '{ error: \\"fn result should extend target type\\"; targets: { fnResult: boolean; targetType: number; }; }'.
-        Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"fn result should extend target type\\"; targets: { fnResult: boolean; targetType: number; }; }'.
+      Argument of type '{ clock: Store<number>[]; fn: (foo: any) => boolean; target: Store<number>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<number>; }'.
+        Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<number>; }'.
+      Parameter 'foo' implicitly has an 'any' type.
       "
     `)
   })
@@ -724,8 +764,8 @@ describe('clock without source', () => {
 
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      Argument of type '{ clock: Store<string>; target: Store<number>; }' is not assignable to parameter of type '{ error: \\"clock should extend target type\\"; targets: { clockType: string; targetType: number; }; }'.
-        Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"clock should extend target type\\"; targets: { clockType: string; targetType: number; }; }'.
+      Argument of type '{ clock: Store<string>; target: Store<number>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<number>; }'.
+        Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<number>; }'.
       "
     `)
   })
@@ -744,8 +784,8 @@ describe('clock without source', () => {
 
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      Argument of type '{ clock: (Store<boolean> | Store<number> | Store<string>)[]; target: Store<number>; }' is not assignable to parameter of type '{ error: \\"clock should extend target type\\"; targets: { clockType: string | number | boolean; targetType: number; }; }'.
-        Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"clock should extend target type\\"; targets: { clockType: string | number | boolean; targetType: number; }; }'.
+      Argument of type '{ clock: (Store<boolean> | Store<number> | Store<string>)[]; target: Store<number>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<number>; }'.
+        Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<number>; }'.
       "
     `)
   })
@@ -762,7 +802,8 @@ describe('sample + .map', () => {
 
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      no errors
+      Argument of type '{ source: Event<string>; target: Store<string>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<string>; }'.
+        Object literal may only specify known properties, and 'source' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<string>; }'.
       "
     `)
   })
@@ -800,6 +841,24 @@ test('from unknown to known type (should fail)', () => {
     "
     Argument of type '{ source: Event<unknown>; target: Event<number>; }' is not assignable to parameter of type '{ error: \\"source should extend target type\\"; targets: { sourceType: unknown; targetType: number; }; }'.
       Object literal may only specify known properties, and 'source' does not exist in type '{ error: \\"source should extend target type\\"; targets: { sourceType: unknown; targetType: number; }; }'.
+    "
+  `)
+})
+
+test('event -> derived store target', () => {
+  const event = createEvent()
+  const store = createStore(0)
+  const derivedStore = store.map(() => 1)
+
+  sample({
+    clock: event,
+    target: derivedStore,
+  })
+
+  expect(typecheck).toMatchInlineSnapshot(`
+    "
+    Argument of type '{ clock: Event<void>; target: DerivedStore<number>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: DerivedStore<number>; }'.
+      Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: DerivedStore<number>; }'.
     "
   `)
 })

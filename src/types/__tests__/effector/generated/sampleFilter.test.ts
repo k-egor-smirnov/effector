@@ -2285,7 +2285,11 @@ describe('no source', () => {
       }
       expect(typecheck).toMatchInlineSnapshot(`
         "
-        no errors
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: BooleanConstructor; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: any) => clk is AB; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
         "
       `)
     })
@@ -2307,19 +2311,20 @@ describe('no source', () => {
       }
       expect(typecheck).toMatchInlineSnapshot(`
         "
-        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB | null) => boolean; }' is not assignable to parameter of type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
-          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
-        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB | null) => boolean; }' is not assignable to parameter of type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
-          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
-        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB | null) => boolean; }' is not assignable to parameter of type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
-          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
-        'clk' is possibly 'null'.
-        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB) => boolean; }' is not assignable to parameter of type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
-          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
-        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: () => number; }' is not assignable to parameter of type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
-          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
-        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: Store<boolean>; }' is not assignable to parameter of type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
-          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: any) => boolean; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB | null) => boolean; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: any) => boolean; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB) => boolean; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: () => number; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: Store<boolean>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
         "
       `)
     })
@@ -2341,8 +2346,35 @@ describe('no source', () => {
       }
       expect(typecheck).toMatchInlineSnapshot(`
         "
-        'val' is possibly 'null'.
-        'val' is possibly 'null'.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: any) => boolean; fn: (val: any) => { a: number; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB | null) => boolean; fn: (val: any) => { a: number; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: any) => boolean; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB | null) => boolean; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: Store<boolean>; fn: (val: any) => { a: number; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: Store<boolean>; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: BooleanConstructor; fn: (val: any) => { a: any; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: BooleanConstructor; fn: (val: AB) => { a: number; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: any) => clk is AB; fn: (val: any) => { a: any; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: any) => clk is AB; fn: (val: AB) => { a: number; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
         "
       `)
     })
@@ -2402,144 +2434,83 @@ describe('no source', () => {
       }
       expect(typecheck).toMatchInlineSnapshot(`
         "
-        'clk' is possibly 'null'.
-        Argument of type '[{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: AB | null) => { a: number; b: string; }; }]' is not assignable to parameter of type '[config: { clock: Event<AB | null>; source?: undefined; filter?: (((clk: AB | null) => clk is AB | null) & ((clk: AB | null) => clk is AB | null)) | undefined; fn?: (((clk: AB | null) => any) & ((clk: AB | null) => any)) | undefined; target: Store<...>; greedy?: boolean | undefined; }] | [config: ...]'.
-          Type '[{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: AB | null) => { a: number; b: string; }; }]' is not assignable to type '[config: { clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<AB>; greedy?: boolean | undefined; }]'.
-            Type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to type '{ clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<AB>; greedy?: boolean | undefined; }'.
-              Types of property 'filter' are incompatible.
-                Type '(clk: AB) => boolean' is not assignable to type '(clk: AB | null) => boolean'.
-                  Types of parameters 'clk' and 'clk' are incompatible.
-                    Type 'AB | null' is not assignable to type 'AB'.
-                      Type 'null' is not assignable to type 'AB'.
-        Argument of type '[{ clock: Event<AB | null>; target: Store<AB>; filter: () => number; fn: (val: AB | null) => { a: number; b: string; }; }]' is not assignable to parameter of type '[config: { clock: Event<AB | null>; source?: undefined; filter?: (((clk: AB | null) => clk is AB | null) & ((clk: AB | null) => clk is AB | null)) | undefined; fn?: (((clk: AB | null) => any) & ((clk: AB | null) => any)) | undefined; target: Store<...>; greedy?: boolean | undefined; }] | [config: ...]'.
-          Type '[{ clock: Event<AB | null>; target: Store<AB>; filter: () => number; fn: (val: AB | null) => { a: number; b: string; }; }]' is not assignable to type '[config: { clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<AB>; greedy?: boolean | undefined; }]'.
-            Type '{ clock: Event<AB | null>; target: Store<AB>; filter: () => number; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to type '{ clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<AB>; greedy?: boolean | undefined; }'.
-              The types returned by 'filter(...)' are incompatible between these types.
-                Type 'number' is not assignable to type 'boolean'.
-        'clk' is possibly 'null'.
-        Argument of type '[{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: AB | null) => { a: number; b: string; }; }]' is not assignable to parameter of type '[config: { clock: Event<AB | null>; source?: undefined; filter?: (((clk: AB | null) => clk is AB | null) & ((clk: AB | null) => clk is AB | null)) | undefined; fn?: (((val: AB | null) => { ...; }) & ((clk: AB | null) => any)) | undefined; target: Store<...>; greedy?: boolean | undefined; } & { ...; }] | [config: ...]'.
-          Type '[{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: AB | null) => { a: number; b: string; }; }]' is not assignable to type '[config: { clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((val: AB | null) => { a: number; b: string; }) | undefined; target: Store<...>; greedy?: boolean | undefined; } & { ...; }]'.
-            Type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to type '{ clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((val: AB | null) => { a: number; b: string; }) | undefined; target: Store<...>; greedy?: boolean | undefined; } & { ...; }'.
-              Type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to type '{ clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((val: AB | null) => { a: number; b: string; }) | undefined; target: Store<...>; greedy?: boolean | undefined; }'.
-                Types of property 'filter' are incompatible.
-                  Type '(clk: AB) => boolean' is not assignable to type '(clk: AB | null) => boolean'.
-                    Types of parameters 'clk' and 'clk' are incompatible.
-                      Type 'AB | null' is not assignable to type 'AB'.
-                        Type 'null' is not assignable to type 'AB'.
-        Argument of type '[{ clock: Event<AB | null>; target: Store<AB>; filter: () => number; fn: (val: AB | null) => { a: number; b: string; }; }]' is not assignable to parameter of type '[config: { clock: Event<AB | null>; source?: undefined; filter?: (((clk: AB | null) => clk is AB | null) & ((clk: AB | null) => clk is AB | null)) | undefined; fn?: (((val: AB | null) => { ...; }) & ((clk: AB | null) => any)) | undefined; target: Store<...>; greedy?: boolean | undefined; } & { ...; }] | [config: ...]'.
-          Type '[{ clock: Event<AB | null>; target: Store<AB>; filter: () => number; fn: (val: AB | null) => { a: number; b: string; }; }]' is not assignable to type '[config: { clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((val: AB | null) => { a: number; b: string; }) | undefined; target: Store<...>; greedy?: boolean | undefined; } & { ...; }]'.
-            Type '{ clock: Event<AB | null>; target: Store<AB>; filter: () => number; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to type '{ clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((val: AB | null) => { a: number; b: string; }) | undefined; target: Store<...>; greedy?: boolean | undefined; } & { ...; }'.
-              Type '{ clock: Event<AB | null>; target: Store<AB>; filter: () => number; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to type '{ clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((val: AB | null) => { a: number; b: string; }) | undefined; target: Store<...>; greedy?: boolean | undefined; }'.
-                The types returned by 'filter(...)' are incompatible between these types.
-                  Type 'number' is not assignable to type 'boolean'.
-        'val' is possibly 'null'.
-        Property 'c' does not exist on type 'AB'.
-        'val' is possibly 'null'.
-        'val' is possibly 'null'.
-        Property 'c' does not exist on type 'AB'.
-        'val' is possibly 'null'.
-        'clk' is possibly 'null'.
-        'val' is possibly 'null'.
-        Property 'c' does not exist on type 'AB'.
-        'val' is possibly 'null'.
-        Argument of type '[{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: AB | null) => { a: any; b: string; }; }]' is not assignable to parameter of type '[config: { clock: Event<AB | null>; source?: undefined; filter?: (((clk: AB | null) => clk is AB | null) & ((clk: AB | null) => clk is AB | null)) | undefined; fn?: (((clk: AB | null) => any) & ((clk: AB | null) => any)) | undefined; target: Store<...>; greedy?: boolean | undefined; }] | [config: ...]'.
-          Type '[{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: AB | null) => { a: any; b: string; }; }]' is not assignable to type '[config: { clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<AB>; greedy?: boolean | undefined; }]'.
-            Type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: AB | null) => { a: any; b: string; }; }' is not assignable to type '{ clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<AB>; greedy?: boolean | undefined; }'.
-              Types of property 'filter' are incompatible.
-                Type '(clk: AB) => boolean' is not assignable to type '(clk: AB | null) => boolean'.
-                  Types of parameters 'clk' and 'clk' are incompatible.
-                    Type 'AB | null' is not assignable to type 'AB'.
-                      Type 'null' is not assignable to type 'AB'.
-        'val' is possibly 'null'.
-        Property 'c' does not exist on type 'AB'.
-        'val' is possibly 'null'.
-        Argument of type '[{ clock: Event<AB | null>; target: Store<AB>; filter: () => number; fn: (val: AB | null) => { a: any; b: string; }; }]' is not assignable to parameter of type '[config: { clock: Event<AB | null>; source?: undefined; filter?: (((clk: AB | null) => clk is AB | null) & ((clk: AB | null) => clk is AB | null)) | undefined; fn?: (((clk: AB | null) => any) & ((clk: AB | null) => any)) | undefined; target: Store<...>; greedy?: boolean | undefined; }] | [config: ...]'.
-          Type '[{ clock: Event<AB | null>; target: Store<AB>; filter: () => number; fn: (val: AB | null) => { a: any; b: string; }; }]' is not assignable to type '[config: { clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<AB>; greedy?: boolean | undefined; }]'.
-            Type '{ clock: Event<AB | null>; target: Store<AB>; filter: () => number; fn: (val: AB | null) => { a: any; b: string; }; }' is not assignable to type '{ clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<AB>; greedy?: boolean | undefined; }'.
-              The types returned by 'filter(...)' are incompatible between these types.
-                Type 'number' is not assignable to type 'boolean'.
-        'val' is possibly 'null'.
-        Property 'c' does not exist on type 'AB'.
-        'val' is possibly 'null'.
-        Argument of type '[{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB | null) => boolean; fn: (val: ABN) => { a: any; b: string; }; }]' is not assignable to parameter of type '[config: { clock: Event<AB | null>; source?: undefined; filter?: (((clk: AB | null) => clk is AB | null) & ((clk: AB | null) => clk is AB | null)) | undefined; fn?: (((clk: AB | null) => any) & ((clk: AB | null) => any)) | undefined; target: Store<...>; greedy?: boolean | undefined; }] | [config: ...]'.
-          Type '[{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB | null) => boolean; fn: (val: ABN) => { a: any; b: string; }; }]' is not assignable to type '[config: { clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<AB>; greedy?: boolean | undefined; }]'.
-            Type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB | null) => boolean; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to type '{ clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<AB>; greedy?: boolean | undefined; }'.
-              Types of property 'fn' are incompatible.
-                Type '(val: ABN) => { a: any; b: string; }' is not assignable to type '(clk: AB | null) => any'.
-                  Types of parameters 'val' and 'clk' are incompatible.
-                    Type 'AB | null' is not assignable to type 'ABN'.
-                      Type 'null' is not assignable to type 'ABN'.
-        Property 'c' does not exist on type 'ABN'.
-        Type '(val: ABN) => { a: any; b: string; }' is not assignable to type '((clk: AB | null) => any) & ((val: ABN) => { a: any; b: string; })'.
-          Type '(val: ABN) => { a: any; b: string; }' is not assignable to type '(clk: AB | null) => any'.
-            Types of parameters 'val' and 'clk' are incompatible.
-              Type 'AB | null' is not assignable to type 'ABN'.
-                Type 'null' is not assignable to type 'ABN'.
-        Property 'c' does not exist on type 'ABN'.
-        Argument of type '[{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB | null) => boolean; fn: (val: ABN) => { a: any; b: string; }; }]' is not assignable to parameter of type '[config: { clock: Event<AB | null>; source?: undefined; filter?: (((clk: AB | null) => clk is AB | null) & ((clk: AB | null) => clk is AB | null)) | undefined; fn?: (((clk: AB | null) => any) & ((clk: AB | null) => any)) | undefined; target: Store<...>; greedy?: boolean | undefined; }] | [config: ...]'.
-          Type '[{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB | null) => boolean; fn: (val: ABN) => { a: any; b: string; }; }]' is not assignable to type '[config: { clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<AB>; greedy?: boolean | undefined; }]'.
-            Type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB | null) => boolean; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to type '{ clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<AB>; greedy?: boolean | undefined; }'.
-              Types of property 'fn' are incompatible.
-                Type '(val: ABN) => { a: any; b: string; }' is not assignable to type '(clk: AB | null) => any'.
-                  Types of parameters 'val' and 'clk' are incompatible.
-                    Type 'AB | null' is not assignable to type 'ABN'.
-                      Type 'null' is not assignable to type 'ABN'.
-        'clk' is possibly 'null'.
-        Property 'c' does not exist on type 'ABN'.
-        Argument of type '[{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: ABN) => { a: any; b: string; }; }]' is not assignable to parameter of type '[config: { clock: Event<AB | null>; source?: undefined; filter?: (((clk: AB | null) => clk is AB | null) & ((clk: AB | null) => clk is AB | null)) | undefined; fn?: (((clk: AB | null) => any) & ((clk: AB | null) => any)) | undefined; target: Store<...>; greedy?: boolean | undefined; } & { ...; }] | [config: ...]'.
-          Type '[{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: ABN) => { a: any; b: string; }; }]' is not assignable to type '[config: { clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<AB>; greedy?: boolean | undefined; } & { ...; }]'.
-            Type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to type '{ clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<AB>; greedy?: boolean | undefined; } & { ...; }'.
-              Type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to type '{ clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<AB>; greedy?: boolean | undefined; }'.
-                Types of property 'filter' are incompatible.
-                  Type '(clk: AB) => boolean' is not assignable to type '(clk: AB | null) => boolean'.
-                    Types of parameters 'clk' and 'clk' are incompatible.
-                      Type 'AB | null' is not assignable to type 'AB'.
-                        Type 'null' is not assignable to type 'AB'.
-        Property 'c' does not exist on type 'ABN'.
-        Argument of type '[{ clock: Event<AB | null>; target: Store<AB>; filter: () => number; fn: (val: ABN) => { a: any; b: string; }; }]' is not assignable to parameter of type '[config: { clock: Event<AB | null>; source?: undefined; filter?: (((clk: AB | null) => clk is AB | null) & ((clk: AB | null) => clk is AB | null)) | undefined; fn?: (((clk: AB | null) => any) & ((clk: AB | null) => any)) | undefined; target: Store<...>; greedy?: boolean | undefined; } & { ...; }] | [config: ...]'.
-          Type '[{ clock: Event<AB | null>; target: Store<AB>; filter: () => number; fn: (val: ABN) => { a: any; b: string; }; }]' is not assignable to type '[config: { clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<AB>; greedy?: boolean | undefined; } & { ...; }]'.
-            Type '{ clock: Event<AB | null>; target: Store<AB>; filter: () => number; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to type '{ clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<AB>; greedy?: boolean | undefined; } & { ...; }'.
-              Type '{ clock: Event<AB | null>; target: Store<AB>; filter: () => number; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to type '{ clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<AB>; greedy?: boolean | undefined; }'.
-                The types returned by 'filter(...)' are incompatible between these types.
-                  Type 'number' is not assignable to type 'boolean'.
-        Property 'c' does not exist on type 'ABN'.
-        'val' is possibly 'null'.
-        Property 'c' does not exist on type 'AB'.
-        'val' is possibly 'null'.
-        Type '(val: ABN) => { a: any; b: string; }' is not assignable to type '((clk: AB | null) => any) & ((val: ABN) => { a: any; b: string; })'.
-          Type '(val: ABN) => { a: any; b: string; }' is not assignable to type '(clk: AB | null) => any'.
-            Types of parameters 'val' and 'clk' are incompatible.
-              Type 'AB | null' is not assignable to type 'ABN'.
-                Type 'null' is not assignable to type 'ABN'.
-        Property 'c' does not exist on type 'ABN'.
-        Property 'c' does not exist on type 'AB'.
-        Type '(val: ABN) => { a: any; b: string; }' is not assignable to type '((clk: AB) => any) & ((val: ABN) => { a: any; b: string; })'.
-          Type '(val: ABN) => { a: any; b: string; }' is not assignable to type '(clk: AB) => any'.
-            Types of parameters 'val' and 'clk' are incompatible.
-              Type 'AB' is not assignable to type 'ABN'.
-                Types of property 'b' are incompatible.
-                  Type 'string' is not assignable to type 'number'.
-        Property 'c' does not exist on type 'ABN'.
-        'val' is possibly 'null'.
-        Property 'c' does not exist on type 'AB'.
-        'val' is possibly 'null'.
-        Argument of type '[{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB | null) => clk is AB; fn: (val: ABN) => { a: number; b: number; }; }]' is not assignable to parameter of type '[config: { clock: Event<AB | null>; source?: undefined; filter?: (((clk: AB | null) => clk is AB | null) & ((clk: AB | null) => clk is AB | null)) | undefined; fn?: (((clk: AB | null) => any) & ((clk: AB | null) => any)) | undefined; target: Store<...>; greedy?: boolean | undefined; }] | [config: ...]'.
-          Type '[{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB | null) => clk is AB; fn: (val: ABN) => { a: number; b: number; }; }]' is not assignable to type '[config: { clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<AB>; greedy?: boolean | undefined; }]'.
-            Type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB | null) => clk is AB; fn: (val: ABN) => { a: number; b: number; }; }' is not assignable to type '{ clock: Event<AB | null>; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<AB>; greedy?: boolean | undefined; }'.
-              Types of property 'fn' are incompatible.
-                Type '(val: ABN) => { a: number; b: number; }' is not assignable to type '(clk: AB | null) => any'.
-                  Types of parameters 'val' and 'clk' are incompatible.
-                    Type 'AB | null' is not assignable to type 'ABN'.
-                      Type 'null' is not assignable to type 'ABN'.
-        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: any) => clk is AB; fn: () => { a: number; b: number; }; }' is not assignable to parameter of type '{ error: \\"fn result should extend target type\\"; targets: { fnResult: { a: number; b: number; }; targetType: AB; }; }'.
-          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"fn result should extend target type\\"; targets: { fnResult: { a: number; b: number; }; targetType: AB; }; }'.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: any) => boolean; fn: (val: any) => { a: number; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
         Parameter 'clk' implicitly has an 'any' type.
-        Type '(val: ABN) => { a: number; b: number; }' is not assignable to type '((clk: AB) => any) & ((val: ABN) => { a: number; b: number; })'.
-          Type '(val: ABN) => { a: number; b: number; }' is not assignable to type '(clk: AB) => any'.
-            Types of parameters 'val' and 'clk' are incompatible.
-              Type 'AB' is not assignable to type 'ABN'.
-        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: BooleanConstructor; fn: () => { a: number; b: number; }; }' is not assignable to parameter of type '{ error: \\"fn result should extend target type\\"; targets: { fnResult: { a: number; b: number; }; targetType: AB; }; }'.
-          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"fn result should extend target type\\"; targets: { fnResult: { a: number; b: number; }; targetType: AB; }; }'.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: any) => { a: number; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: () => number; fn: (val: any) => { a: number; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: any) => boolean; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: () => number; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: any) => boolean; fn: (val: any) => { a: any; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB | null) => boolean; fn: (val: any) => { a: any; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: any) => boolean; fn: (val: any) => { a: any; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: any) => { a: any; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: () => number; fn: (val: any) => { a: any; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: any) => boolean; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Property 'c' does not exist on type 'ABN'.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB | null) => boolean; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Property 'c' does not exist on type 'ABN'.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: any) => boolean; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Property 'c' does not exist on type 'ABN'.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Property 'c' does not exist on type 'ABN'.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: () => number; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Property 'c' does not exist on type 'ABN'.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: Store<boolean>; fn: (val: any) => { a: any; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: Store<boolean>; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Property 'c' does not exist on type 'ABN'.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: BooleanConstructor; fn: (val: any) => { a: any; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: BooleanConstructor; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Property 'c' does not exist on type 'ABN'.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: any) => clk is AB; fn: (val: any) => { a: any; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: any) => clk is AB; fn: (val: ABN) => { a: number; b: number; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: (clk: any) => clk is AB; fn: () => { a: number; b: number; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: BooleanConstructor; fn: (val: ABN) => { a: number; b: number; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Argument of type '{ clock: Event<AB | null>; target: Store<AB>; filter: BooleanConstructor; fn: () => { a: number; b: number; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
         "
       `)
     })
@@ -2553,7 +2524,11 @@ describe('no source', () => {
       }
       expect(typecheck).toMatchInlineSnapshot(`
         "
-        no errors
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: BooleanConstructor; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: any) => clk is AB; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
         "
       `)
     })
@@ -2575,19 +2550,20 @@ describe('no source', () => {
       }
       expect(typecheck).toMatchInlineSnapshot(`
         "
-        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB | null) => boolean; }' is not assignable to parameter of type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
-          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
-        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB | null) => boolean; }' is not assignable to parameter of type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
-          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
-        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB | null) => boolean; }' is not assignable to parameter of type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
-          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
-        'clk' is possibly 'null'.
-        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB) => boolean; }' is not assignable to parameter of type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
-          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
-        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: () => number; }' is not assignable to parameter of type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
-          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
-        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: Store<boolean>; }' is not assignable to parameter of type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
-          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"clock should extend target type\\"; targets: { clockType: AB | null; targetType: AB; }; }'.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: any) => boolean; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB | null) => boolean; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: any) => boolean; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB) => boolean; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: () => number; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: Store<boolean>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
         "
       `)
     })
@@ -2609,8 +2585,35 @@ describe('no source', () => {
       }
       expect(typecheck).toMatchInlineSnapshot(`
         "
-        'val' is possibly 'null'.
-        'val' is possibly 'null'.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: any) => boolean; fn: (val: any) => { a: number; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB | null) => boolean; fn: (val: any) => { a: number; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: any) => boolean; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB | null) => boolean; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: Store<boolean>; fn: (val: any) => { a: number; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: Store<boolean>; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: BooleanConstructor; fn: (val: any) => { a: any; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: BooleanConstructor; fn: (val: AB) => { a: number; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: any) => clk is AB; fn: (val: any) => { a: any; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: any) => clk is AB; fn: (val: AB) => { a: number; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
         "
       `)
     })
@@ -2670,142 +2673,83 @@ describe('no source', () => {
       }
       expect(typecheck).toMatchInlineSnapshot(`
         "
-        'clk' is possibly 'null'.
-        Argument of type '[{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: AB | null) => { a: number; b: string; }; }]' is not assignable to parameter of type '[config: { clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: (((clk: AB | null) => clk is AB | null) & ((clk: AB | null) => clk is AB | null)) | undefined; fn?: (((clk: AB | null) => any) & ((clk: AB | null) => any)) | undefined; target: Store<...>; greedy?: boolean | undefined; }] | [config: ...]'.
-          Type '[{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: AB | null) => { a: number; b: string; }; }]' is not assignable to type '[config: { clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<...>; greedy?: boolean | undefined; }]'.
-            Type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to type '{ clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<...>; greedy?: boolean | undefined; }'.
-              Types of property 'filter' are incompatible.
-                Type '(clk: AB) => boolean' is not assignable to type '(clk: AB | null) => boolean'.
-                  Types of parameters 'clk' and 'clk' are incompatible.
-                    Type 'AB | null' is not assignable to type 'AB'.
-                      Type 'null' is not assignable to type 'AB'.
-        Argument of type '[{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: () => number; fn: (val: AB | null) => { a: number; b: string; }; }]' is not assignable to parameter of type '[config: { clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: (((clk: AB | null) => clk is AB | null) & ((clk: AB | null) => clk is AB | null)) | undefined; fn?: (((clk: AB | null) => any) & ((clk: AB | null) => any)) | undefined; target: Store<...>; greedy?: boolean | undefined; }] | [config: ...]'.
-          Type '[{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: () => number; fn: (val: AB | null) => { a: number; b: string; }; }]' is not assignable to type '[config: { clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<...>; greedy?: boolean | undefined; }]'.
-            Type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: () => number; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to type '{ clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<...>; greedy?: boolean | undefined; }'.
-              The types returned by 'filter(...)' are incompatible between these types.
-                Type 'number' is not assignable to type 'boolean'.
-        'clk' is possibly 'null'.
-        Argument of type '[{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: AB | null) => { a: number; b: string; }; }]' is not assignable to parameter of type '[config: { clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: (((clk: AB | null) => clk is AB | null) & ((clk: AB | null) => clk is AB | null)) | undefined; fn?: (((val: AB | null) => { ...; }) & ((clk: AB | null) => any)) | undefined; target: Store<...>; greedy?: boolean | undefined; } & { ...; }...'.
-          Type '[{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: AB | null) => { a: number; b: string; }; }]' is not assignable to type '[config: { clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((val: AB | null) => { a: number; b: string; }) | undefined; target: Store<...>; greedy?: boolean | undefined; } & { ...; }]'.
-            Type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to type '{ clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((val: AB | null) => { a: number; b: string; }) | undefined; target: Store<...>; greedy?: boolean | undefined; } & { ...; }'.
-              Type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to type '{ clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((val: AB | null) => { a: number; b: string; }) | undefined; target: Store<...>; greedy?: boolean | undefined; }'.
-                Types of property 'filter' are incompatible.
-                  Type '(clk: AB) => boolean' is not assignable to type '(clk: AB | null) => boolean'.
-                    Types of parameters 'clk' and 'clk' are incompatible.
-                      Type 'AB | null' is not assignable to type 'AB'.
-                        Type 'null' is not assignable to type 'AB'.
-        Argument of type '[{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: () => number; fn: (val: AB | null) => { a: number; b: string; }; }]' is not assignable to parameter of type '[config: { clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: (((clk: AB | null) => clk is AB | null) & ((clk: AB | null) => clk is AB | null)) | undefined; fn?: (((val: AB | null) => { ...; }) & ((clk: AB | null) => any)) | undefined; target: Store<...>; greedy?: boolean | undefined; } & { ...; }...'.
-          Type '[{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: () => number; fn: (val: AB | null) => { a: number; b: string; }; }]' is not assignable to type '[config: { clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((val: AB | null) => { a: number; b: string; }) | undefined; target: Store<...>; greedy?: boolean | undefined; } & { ...; }]'.
-            Type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: () => number; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to type '{ clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((val: AB | null) => { a: number; b: string; }) | undefined; target: Store<...>; greedy?: boolean | undefined; } & { ...; }'.
-              Type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: () => number; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to type '{ clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((val: AB | null) => { a: number; b: string; }) | undefined; target: Store<...>; greedy?: boolean | undefined; }'.
-                The types returned by 'filter(...)' are incompatible between these types.
-                  Type 'number' is not assignable to type 'boolean'.
-        'val' is possibly 'null'.
-        Property 'c' does not exist on type 'AB'.
-        'val' is possibly 'null'.
-        'val' is possibly 'null'.
-        Property 'c' does not exist on type 'AB'.
-        'val' is possibly 'null'.
-        'clk' is possibly 'null'.
-        'val' is possibly 'null'.
-        Property 'c' does not exist on type 'AB'.
-        'val' is possibly 'null'.
-        Argument of type '[{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: AB | null) => { a: any; b: string; }; }]' is not assignable to parameter of type '[config: { clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: (((clk: AB | null) => clk is AB | null) & ((clk: AB | null) => clk is AB | null)) | undefined; fn?: (((clk: AB | null) => any) & ((clk: AB | null) => any)) | undefined; target: Store<...>; greedy?: boolean | undefined; }] | [config: ...]'.
-          Type '[{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: AB | null) => { a: any; b: string; }; }]' is not assignable to type '[config: { clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<...>; greedy?: boolean | undefined; }]'.
-            Type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: AB | null) => { a: any; b: string; }; }' is not assignable to type '{ clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<...>; greedy?: boolean | undefined; }'.
-              Types of property 'filter' are incompatible.
-                Type '(clk: AB) => boolean' is not assignable to type '(clk: AB | null) => boolean'.
-                  Types of parameters 'clk' and 'clk' are incompatible.
-                    Type 'AB | null' is not assignable to type 'AB'.
-                      Type 'null' is not assignable to type 'AB'.
-        'val' is possibly 'null'.
-        Property 'c' does not exist on type 'AB'.
-        'val' is possibly 'null'.
-        Argument of type '[{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: () => number; fn: (val: AB | null) => { a: any; b: string; }; }]' is not assignable to parameter of type '[config: { clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: (((clk: AB | null) => clk is AB | null) & ((clk: AB | null) => clk is AB | null)) | undefined; fn?: (((clk: AB | null) => any) & ((clk: AB | null) => any)) | undefined; target: Store<...>; greedy?: boolean | undefined; }] | [config: ...]'.
-          Type '[{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: () => number; fn: (val: AB | null) => { a: any; b: string; }; }]' is not assignable to type '[config: { clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<...>; greedy?: boolean | undefined; }]'.
-            Type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: () => number; fn: (val: AB | null) => { a: any; b: string; }; }' is not assignable to type '{ clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<...>; greedy?: boolean | undefined; }'.
-              The types returned by 'filter(...)' are incompatible between these types.
-                Type 'number' is not assignable to type 'boolean'.
-        'val' is possibly 'null'.
-        Property 'c' does not exist on type 'AB'.
-        'val' is possibly 'null'.
-        Argument of type '[{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB | null) => boolean; fn: (val: ABN) => { a: any; b: string; }; }]' is not assignable to parameter of type '[config: { clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: (((clk: AB | null) => clk is AB | null) & ((clk: AB | null) => clk is AB | null)) | undefined; fn?: (((clk: AB | null) => any) & ((clk: AB | null) => any)) | undefined; target: Store<...>; greedy?: boolean | undefined; }] | [config: ...]'.
-          Type '[{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB | null) => boolean; fn: (val: ABN) => { a: any; b: string; }; }]' is not assignable to type '[config: { clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<...>; greedy?: boolean | undefined; }]'.
-            Type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB | null) => boolean; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to type '{ clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<...>; greedy?: boolean | undefined; }'.
-              Types of property 'fn' are incompatible.
-                Type '(val: ABN) => { a: any; b: string; }' is not assignable to type '(clk: AB | null) => any'.
-                  Types of parameters 'val' and 'clk' are incompatible.
-                    Type 'AB | null' is not assignable to type 'ABN'.
-                      Type 'null' is not assignable to type 'ABN'.
-        Property 'c' does not exist on type 'ABN'.
-        Type '(val: ABN) => { a: any; b: string; }' is not assignable to type '((clk: AB | null) => any) & ((val: ABN) => { a: any; b: string; })'.
-          Type '(val: ABN) => { a: any; b: string; }' is not assignable to type '(clk: AB | null) => any'.
-            Types of parameters 'val' and 'clk' are incompatible.
-              Type 'AB | null' is not assignable to type 'ABN'.
-                Type 'null' is not assignable to type 'ABN'.
-        Property 'c' does not exist on type 'ABN'.
-        Argument of type '[{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB | null) => boolean; fn: (val: ABN) => { a: any; b: string; }; }]' is not assignable to parameter of type '[config: { clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: (((clk: AB | null) => clk is AB | null) & ((clk: AB | null) => clk is AB | null)) | undefined; fn?: (((clk: AB | null) => any) & ((clk: AB | null) => any)) | undefined; target: Store<...>; greedy?: boolean | undefined; }] | [config: ...]'.
-          Type '[{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB | null) => boolean; fn: (val: ABN) => { a: any; b: string; }; }]' is not assignable to type '[config: { clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<...>; greedy?: boolean | undefined; }]'.
-            Type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB | null) => boolean; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to type '{ clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<...>; greedy?: boolean | undefined; }'.
-              Types of property 'fn' are incompatible.
-                Type '(val: ABN) => { a: any; b: string; }' is not assignable to type '(clk: AB | null) => any'.
-                  Types of parameters 'val' and 'clk' are incompatible.
-                    Type 'AB | null' is not assignable to type 'ABN'.
-                      Type 'null' is not assignable to type 'ABN'.
-        'clk' is possibly 'null'.
-        Property 'c' does not exist on type 'ABN'.
-        Argument of type '[{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: ABN) => { a: any; b: string; }; }]' is not assignable to parameter of type '[config: { clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: (((clk: AB | null) => clk is AB | null) & ((clk: AB | null) => clk is AB | null)) | undefined; fn?: (((clk: AB | null) => any) & ((clk: AB | null) => any)) | undefined; target: Store<...>; greedy?: boolean | undefined; } & { ...; }] | [...'.
-          Type '[{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: ABN) => { a: any; b: string; }; }]' is not assignable to type '[config: { clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<...>; greedy?: boolean | undefined; } & { ...; }]'.
-            Type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to type '{ clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<...>; greedy?: boolean | undefined; } & { ...; }'.
-              Type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to type '{ clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<...>; greedy?: boolean | undefined; }'.
-                Types of property 'filter' are incompatible.
-                  Type '(clk: AB) => boolean' is not assignable to type '(clk: AB | null) => boolean'.
-                    Types of parameters 'clk' and 'clk' are incompatible.
-                      Type 'AB | null' is not assignable to type 'AB'.
-                        Type 'null' is not assignable to type 'AB'.
-        Property 'c' does not exist on type 'ABN'.
-        Argument of type '[{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: () => number; fn: (val: ABN) => { a: any; b: string; }; }]' is not assignable to parameter of type '[config: { clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: (((clk: AB | null) => clk is AB | null) & ((clk: AB | null) => clk is AB | null)) | undefined; fn?: (((clk: AB | null) => any) & ((clk: AB | null) => any)) | undefined; target: Store<...>; greedy?: boolean | undefined; } & { ...; }] | [...'.
-          Type '[{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: () => number; fn: (val: ABN) => { a: any; b: string; }; }]' is not assignable to type '[config: { clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<...>; greedy?: boolean | undefined; } & { ...; }]'.
-            Type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: () => number; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to type '{ clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<...>; greedy?: boolean | undefined; } & { ...; }'.
-              Type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: () => number; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to type '{ clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<...>; greedy?: boolean | undefined; }'.
-                The types returned by 'filter(...)' are incompatible between these types.
-                  Type 'number' is not assignable to type 'boolean'.
-        Property 'c' does not exist on type 'ABN'.
-        'val' is possibly 'null'.
-        Property 'c' does not exist on type 'AB'.
-        'val' is possibly 'null'.
-        Type '(val: ABN) => { a: any; b: string; }' is not assignable to type '((clk: AB | null) => any) & ((val: ABN) => { a: any; b: string; })'.
-          Type '(val: ABN) => { a: any; b: string; }' is not assignable to type '(clk: AB | null) => any'.
-            Types of parameters 'val' and 'clk' are incompatible.
-              Type 'AB | null' is not assignable to type 'ABN'.
-                Type 'null' is not assignable to type 'ABN'.
-        Property 'c' does not exist on type 'ABN'.
-        Property 'c' does not exist on type 'AB'.
-        Type '(val: ABN) => { a: any; b: string; }' is not assignable to type '((clk: AB) => any) & ((val: ABN) => { a: any; b: string; })'.
-          Type '(val: ABN) => { a: any; b: string; }' is not assignable to type '(clk: AB) => any'.
-            Types of parameters 'val' and 'clk' are incompatible.
-              Type 'AB' is not assignable to type 'ABN'.
-        Property 'c' does not exist on type 'ABN'.
-        'val' is possibly 'null'.
-        Property 'c' does not exist on type 'AB'.
-        'val' is possibly 'null'.
-        Argument of type '[{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB | null) => clk is AB; fn: (val: ABN) => { a: number; b: number; }; }]' is not assignable to parameter of type '[config: { clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: (((clk: AB | null) => clk is AB | null) & ((clk: AB | null) => clk is AB | null)) | undefined; fn?: (((clk: AB | null) => any) & ((clk: AB | null) => any)) | undefined; target: Store<...>; greedy?: boolean | undefined; }] | [config: ...]'.
-          Type '[{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB | null) => clk is AB; fn: (val: ABN) => { a: number; b: number; }; }]' is not assignable to type '[config: { clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<...>; greedy?: boolean | undefined; }]'.
-            Type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB | null) => clk is AB; fn: (val: ABN) => { a: number; b: number; }; }' is not assignable to type '{ clock: (Event<AB> | Event<AB | null>)[]; source?: undefined; filter?: ((clk: AB | null) => boolean) | undefined; fn?: ((clk: AB | null) => any) | undefined; target: Store<...>; greedy?: boolean | undefined; }'.
-              Types of property 'fn' are incompatible.
-                Type '(val: ABN) => { a: number; b: number; }' is not assignable to type '(clk: AB | null) => any'.
-                  Types of parameters 'val' and 'clk' are incompatible.
-                    Type 'AB | null' is not assignable to type 'ABN'.
-                      Type 'null' is not assignable to type 'ABN'.
-        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: any) => clk is AB; fn: () => { a: number; b: number; }; }' is not assignable to parameter of type '{ error: \\"fn result should extend target type\\"; targets: { fnResult: { a: number; b: number; }; targetType: AB; }; }'.
-          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"fn result should extend target type\\"; targets: { fnResult: { a: number; b: number; }; targetType: AB; }; }'.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: any) => boolean; fn: (val: any) => { a: number; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
         Parameter 'clk' implicitly has an 'any' type.
-        Type '(val: ABN) => { a: number; b: number; }' is not assignable to type '((clk: AB) => any) & ((val: ABN) => { a: number; b: number; })'.
-          Type '(val: ABN) => { a: number; b: number; }' is not assignable to type '(clk: AB) => any'.
-            Types of parameters 'val' and 'clk' are incompatible.
-              Type 'AB' is not assignable to type 'ABN'.
-        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: BooleanConstructor; fn: () => { a: number; b: number; }; }' is not assignable to parameter of type '{ error: \\"fn result should extend target type\\"; targets: { fnResult: { a: number; b: number; }; targetType: AB; }; }'.
-          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"fn result should extend target type\\"; targets: { fnResult: { a: number; b: number; }; targetType: AB; }; }'.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: any) => { a: number; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: () => number; fn: (val: any) => { a: number; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: any) => boolean; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: () => number; fn: (val: AB | null) => { a: number; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: any) => boolean; fn: (val: any) => { a: any; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB | null) => boolean; fn: (val: any) => { a: any; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: any) => boolean; fn: (val: any) => { a: any; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: any) => { a: any; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: () => number; fn: (val: any) => { a: any; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: any) => boolean; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Property 'c' does not exist on type 'ABN'.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB | null) => boolean; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Property 'c' does not exist on type 'ABN'.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: any) => boolean; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Property 'c' does not exist on type 'ABN'.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: AB) => boolean; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Property 'c' does not exist on type 'ABN'.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: () => number; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Property 'c' does not exist on type 'ABN'.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: Store<boolean>; fn: (val: any) => { a: any; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: Store<boolean>; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Property 'c' does not exist on type 'ABN'.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: BooleanConstructor; fn: (val: any) => { a: any; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: BooleanConstructor; fn: (val: ABN) => { a: any; b: string; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Property 'c' does not exist on type 'ABN'.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: any) => clk is AB; fn: (val: any) => { a: any; b: any; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Parameter 'val' implicitly has an 'any' type.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: any) => clk is AB; fn: (val: ABN) => { a: number; b: number; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: (clk: any) => clk is AB; fn: () => { a: number; b: number; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Parameter 'clk' implicitly has an 'any' type.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: BooleanConstructor; fn: (val: ABN) => { a: number; b: number; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+        Argument of type '{ clock: (Event<AB> | Event<AB | null>)[]; target: Store<AB>; filter: BooleanConstructor; fn: () => { a: number; b: number; }; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
+          Object literal may only specify known properties, and 'clock' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<AB>; }'.
         "
       `)
     })
@@ -3038,6 +2982,8 @@ describe('no source', () => {
           Type '(val: ABN) => { a: any; b: string; }' is not assignable to type '(clk: AB) => any'.
             Types of parameters 'val' and 'clk' are incompatible.
               Type 'AB' is not assignable to type 'ABN'.
+                Types of property 'b' are incompatible.
+                  Type 'string' is not assignable to type 'number'.
         Property 'c' does not exist on type 'ABN'.
         "
       `)

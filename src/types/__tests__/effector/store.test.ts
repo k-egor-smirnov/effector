@@ -46,12 +46,18 @@ test('combine', () => {
   const a = createStore('')
   const b = createStore(0)
   const c = combine(a, b, (a, b) => a + b)
+  //@ts-expect-error
   c.on(ev, (state, payload) => state)
+  //@ts-expect-error
   c.reset(ev)
+  //@ts-expect-error
   c.off(ev)
   expect(typecheck).toMatchInlineSnapshot(`
     "
-    no errors
+    Property 'on' does not exist on type 'DerivedStore<string>'.
+    Parameter 'state' implicitly has an 'any' type.
+    Parameter 'payload' implicitly has an 'any' type.
+    Property 'reset' does not exist on type 'DerivedStore<string>'.
     "
   `)
 })
@@ -106,7 +112,8 @@ test('#map', () => {
   const map_check2: Store<number> = computed
   expect(typecheck).toMatchInlineSnapshot(`
     "
-    Type 'Store<string>' is not assignable to type 'Store<number>'.
+    Type 'DerivedStore<string>' is missing the following properties from type 'Store<string>': reset, on
+    Type 'DerivedStore<string>' is missing the following properties from type 'Store<number>': reset, on
     "
   `)
 })
@@ -121,7 +128,7 @@ describe('#reset', () => {
     computed.reset(event)
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      no errors
+      Property 'reset' does not exist on type 'DerivedStore<string>'.
       "
     `)
   })
@@ -149,29 +156,29 @@ describe('#reset', () => {
   })
 })
 
-describe("#reinit", () => {
-  test("simple case", () => {
-    const $store = createStore<Array<number>>([]);
-    const eventPush = createEvent<number>();
-    $store.on(eventPush, (store, item) => [...store, item]);
-    eventPush(1);
-    eventPush(2);
-    eventPush(3);
-    const before = $store.getState().length;
-    expect(before).toBe(3);
-    $store.reinit?.();
+describe('#reinit', () => {
+  test('simple case', () => {
+    const $store = createStore<Array<number>>([])
+    const eventPush = createEvent<number>()
+    $store.on(eventPush, (store, item) => [...store, item])
+    eventPush(1)
+    eventPush(2)
+    eventPush(3)
+    const before = $store.getState().length
+    expect(before).toBe(3)
+    $store.reinit?.()
 
-    const after = $store.getState().length;
-    expect(after).toBe(0);
+    const after = $store.getState().length
+    expect(after).toBe(0)
 
-    $store.off(eventPush);
+    $store.off(eventPush)
     expect(typecheck).toMatchInlineSnapshot(`
       "
       no errors
       "
-    `);
+    `)
   })
-});
+})
 
 test('#on', () => {
   const event = createEvent()
@@ -182,7 +189,9 @@ test('#on', () => {
   computed.on(event, (state, payload) => state)
   expect(typecheck).toMatchInlineSnapshot(`
     "
-    no errors
+    Property 'on' does not exist on type 'DerivedStore<string>'.
+    Parameter 'state' implicitly has an 'any' type.
+    Parameter 'payload' implicitly has an 'any' type.
     "
   `)
 })

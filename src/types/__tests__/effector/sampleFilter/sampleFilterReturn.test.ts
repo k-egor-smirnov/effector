@@ -79,7 +79,12 @@ describe('unit target', () => {
     }
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      no errors
+      Argument of type '{ filter: () => boolean; source: Event<AN>; target: Store<{ a: number; }>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
+        Object literal may only specify known properties, and 'filter' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
+      Argument of type '{ filter: () => boolean; source: Store<{ a: number; }>; target: Store<{ a: number; }>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
+        Object literal may only specify known properties, and 'filter' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
+      Argument of type '{ filter: () => boolean; source: { a: Store<number>; }; target: Store<{ a: number; }>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
+        Object literal may only specify known properties, and 'filter' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
       "
     `)
   })
@@ -95,7 +100,12 @@ describe('unit target', () => {
     }
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      no errors
+      Argument of type '{ filter: () => boolean; source: Event<AN>; clock: Event<number>; target: Store<{ a: number; }>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
+        Object literal may only specify known properties, and 'filter' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
+      Argument of type '{ filter: () => boolean; source: Store<{ a: number; }>; clock: Event<number>; target: Store<{ a: number; }>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
+        Object literal may only specify known properties, and 'filter' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
+      Argument of type '{ filter: () => boolean; source: { a: Store<number>; }; clock: Event<number>; target: Store<{ a: number; }>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
+        Object literal may only specify known properties, and 'filter' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
       "
     `)
   })
@@ -111,7 +121,12 @@ describe('unit target', () => {
     }
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      no errors
+      Argument of type '{ filter: () => boolean; source: Event<AN>; clock: Store<number>; target: Store<{ a: number; }>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
+        Object literal may only specify known properties, and 'filter' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
+      Argument of type '{ filter: () => boolean; source: Store<{ a: number; }>; clock: Store<number>; target: Store<{ a: number; }>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
+        Object literal may only specify known properties, and 'filter' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
+      Argument of type '{ filter: () => boolean; source: { a: Store<number>; }; clock: Store<number>; target: Store<{ a: number; }>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
+        Object literal may only specify known properties, and 'filter' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
       "
     `)
   })
@@ -127,7 +142,12 @@ describe('unit target', () => {
     }
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      no errors
+      Argument of type '{ filter: () => boolean; source: Event<AN>; clock: (Store<number> | Event<number>)[]; target: Store<{ a: number; }>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
+        Object literal may only specify known properties, and 'filter' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
+      Argument of type '{ filter: () => boolean; source: Store<{ a: number; }>; clock: (Store<number> | Event<number>)[]; target: Store<{ a: number; }>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
+        Object literal may only specify known properties, and 'filter' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
+      Argument of type '{ filter: () => boolean; source: { a: Store<number>; }; clock: (Store<number> | Event<number>)[]; target: Store<{ a: number; }>; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
+        Object literal may only specify known properties, and 'filter' does not exist in type '{ error: \\"target should not be derived store\\"; got: Store<{ a: number; }>; }'.
       "
     `)
   })

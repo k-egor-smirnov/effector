@@ -96,7 +96,8 @@ describe('basic cases', () => {
 
     expect(typecheck).toMatchInlineSnapshot(`
       "
-      no errors
+      Argument of type '{ source: Event<number>; clock: Event<any>; target: never[]; }' is not assignable to parameter of type '{ error: \\"target should not be derived store\\"; got: never[]; }'.
+        Object literal may only specify known properties, and 'source' does not exist in type '{ error: \\"target should not be derived store\\"; got: never[]; }'.
       "
     `)
   })
